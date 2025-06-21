@@ -1,7 +1,14 @@
 import type {Metadata} from 'next';
+import {Inter} from 'next/font/google';
 import './globals.css';
-import { Toaster } from "@/components/ui/toaster";
-import { ThemeProvider } from "@/components/theme-provider";
+import {Toaster} from '@/components/ui/toaster';
+import {ThemeProvider} from '@/components/theme-provider';
+import {cn} from '@/lib/utils';
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+});
 
 export const metadata: Metadata = {
   title: 'Slang Decoder',
@@ -14,21 +21,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet"></link>
-      </head>
-      <body className="font-body antialiased">
+    <html lang="en" className={cn(inter.variable)} suppressHydrationWarning>
+      <head />
+      <body className="font-sans antialiased">
         <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
         >
-            {children}
-            <Toaster />
+          {children}
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

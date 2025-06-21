@@ -59,10 +59,10 @@ export default function Home() {
       <div className="absolute top-4 right-4 z-10">
         <ThemeToggle />
       </div>
-      <main className="flex min-h-screen w-full items-center justify-center bg-background p-4 font-body transition-colors duration-500">
+      <main className="flex min-h-screen w-full items-center justify-center p-4 transition-colors duration-500">
         <div className="w-full max-w-md space-y-6">
           <div className="text-center space-y-2 animate-in fade-in-0 slide-in-from-top-12 duration-1000">
-              <h1 className="text-4xl font-headline font-bold tracking-tighter sm:text-5xl bg-gradient-to-r from-primary via-blue-500 to-pink-500 text-transparent bg-clip-text">
+              <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl bg-gradient-to-r from-primary to-accent text-transparent bg-clip-text">
                   Slang Decoder
               </h1>
               <p className="text-muted-foreground md:text-xl max-w-sm mx-auto">
@@ -96,7 +96,7 @@ export default function Home() {
           {state.data && (
               <Card className="animate-in fade-in-0 zoom-in-95 duration-500">
                   <CardHeader>
-                      <CardTitle className="flex items-center gap-2 text-2xl font-headline">
+                      <CardTitle className="flex items-center gap-2 text-2xl">
                           <MessageSquareQuote className="h-6 w-6 text-primary" />
                           {state.data.slang}
                       </CardTitle>
