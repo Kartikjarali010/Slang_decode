@@ -18,6 +18,8 @@ const initialState = {
   errors: null,
 };
 
+const popularSlang = ["rizz", "cap", "based", "yeet", "simp", "no-cap", "drip", "ghosting"];
+
 function SubmitButton() {
   const { pending } = useFormStatus();
   return (
@@ -55,6 +57,16 @@ export default function Home() {
     }
   }, [state, toast]);
 
+  const handlePopularWordClick = (word: string) => {
+    if (formRef.current) {
+        const slangInput = formRef.current.elements.namedItem("slang") as HTMLInputElement;
+        if (slangInput) {
+            slangInput.value = word;
+            formRef.current.requestSubmit();
+        }
+    }
+  };
+
   return (
     <>
       <div className="absolute top-4 right-4 z-10">
@@ -68,7 +80,7 @@ export default function Home() {
         <div className="flex-grow flex items-center justify-center w-full">
           <div className="w-full max-w-md space-y-6">
             <div className="text-center space-y-2 animate-in fade-in-0 slide-in-from-top-12 duration-1000">
-                <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl bg-gradient-to-r from-primary to-accent text-transparent bg-clip-text">
+                <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl bg-gradient-to-r from-primary to-accent-foreground text-transparent bg-clip-text">
                     Slang Decoder
                 </h1>
                 <p className="text-muted-foreground md:text-xl max-w-sm mx-auto">
@@ -98,6 +110,27 @@ export default function Home() {
                 </form>
               </CardContent>
             </Card>
+
+            <div className="text-center animate-in fade-in-0 duration-1000 delay-300">
+                <h2 className="text-sm font-semibold text-muted-foreground mb-2">
+                    Trending Searches
+                </h2>
+                <div className="flex flex-wrap justify-center gap-2">
+                    {popularSlang.map((word) => (
+                        <Badge
+                            key={word}
+                            variant="outline"
+                            className="cursor-pointer hover:bg-accent"
+                            onClick={() => handlePopularWordClick(word)}
+                            role="button"
+                            tabIndex={0}
+                            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handlePopularWordClick(word) }}
+                        >
+                            {word}
+                        </Badge>
+                    ))}
+                </div>
+            </div>
 
             {state.data && (
                 <Card className="animate-in fade-in-0 zoom-in-95 duration-500">
